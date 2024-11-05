@@ -13,6 +13,7 @@
     "next": "^14.2.16",
     "react": "^18",
     "react-dom": "^18",
+    "syllable": "^5.0.1",
     "twitter-api-v2": "^1.18.1"
   },
   "devDependencies": {

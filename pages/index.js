@@ -1,29 +1,34 @@
 "use client";
 import Head from "next/head";
 import { useState } from "react";
+import { useRouter } from "next/router";
+// import styles from '../styles/globals.css';
 
-async function fetchUserTimeline(username) {
-  try {
-    const encodedUsername = encodeURIComponent(username);
-    const response = await fetch(`/api/tweet?username=${encodedUsername}`);
-    const data = await response.json();
-    if (response.ok) {
-      console.log('User data:', data.user);
-    } else {
-      console.error('Error:', data.error);
-    }
-  } catch (error) {
-    console.error('Fetch error:', error);
-  }
-}
+
+// async function fetchUserTimeline(username) {
+//   try {
+//     const encodedUsername = encodeURIComponent(username);
+//     const response = await fetch(`/api/tweet?username=${encodedUsername}`);
+//     const data = await response.json();
+//     if (response.ok) {
+//       console.log('User data:', data.user);
+//     } else {
+//       console.error('Error:', data.error);
+//     }
+//   } catch (error) {
+//     console.error('Fetch error:', error);
+//   }
+// }
 
 
 // Example usage
-fetchUserTimeline('g0g1g0g1');
+// fetchUserTimeline('g0g1g0g1');
+
 
 
 export default function Home() {
   const [inputValue, setInputValue] = useState('');
+  const router = useRouter();
   
   const onSubmit = (event) => {
     event.preventDefault();
@@ -32,6 +37,10 @@ export default function Home() {
     setInputValue(value);
     console.log('VALUE', value);
     //TODO: make API CALL USING VALUE
+    //go to results page 
+    // TODO: move this logic up when making api call
+    // bellow .stringify(value) should be data!
+    router.push(`/result?query=${value}&data=${JSON.stringify(value)}`);
   }
 
 
