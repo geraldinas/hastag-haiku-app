@@ -1,6 +1,6 @@
 // pages/api/tweet.js
 import axios from 'axios';
-require('dotenv').config();
+//TODO: due to "too many requests this part is on hold" need to pass user id to get timeline, seperate into two functions
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
@@ -24,7 +24,13 @@ export default async function handler(req, res) {
         }
       });
 
-      console.log('User data fetched:', response.data); // Debugging log
+      console.log('User data fetched:', response.data.id); // Debugging log
+      // const response2 = await axios.get(`https://api.twitter.com/2/users/${response.data.id}/tweets`, {
+      //   headers: {
+      //     'Authorization': `Bearer ${bearerToken}`
+      //   }
+      // });
+      // console.log('User data fetched:', response2.data); // Debugging log
       return res.status(200).json({ success: true, user: response.data });
     } catch (error) {
       console.error('Error fetching user:', error.response ? error.response.data : error.message);

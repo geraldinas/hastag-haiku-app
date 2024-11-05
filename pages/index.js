@@ -2,12 +2,10 @@
 import Head from "next/head";
 import { useState } from "react";
 
-async function fetchUser(username) {
+async function fetchUserTimeline(username) {
   try {
     const encodedUsername = encodeURIComponent(username);
-    console.log('encodedUsername::::::::::::', encodedUsername);
     const response = await fetch(`/api/tweet?username=${encodedUsername}`);
-    console.log('response::::::::::::', response);
     const data = await response.json();
     if (response.ok) {
       console.log('User data:', data.user);
@@ -19,8 +17,9 @@ async function fetchUser(username) {
   }
 }
 
+
 // Example usage
-fetchUser('g0g1g0g1');
+fetchUserTimeline('g0g1g0g1');
 
 
 export default function Home() {
