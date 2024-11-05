@@ -1,13 +1,33 @@
 "use client";
 import Head from "next/head";
-import { useState } from "react"
+import { useState } from "react";
+
+async function fetchUser(username) {
+  try {
+    const encodedUsername = encodeURIComponent(username);
+    console.log('encodedUsername::::::::::::', encodedUsername);
+    const response = await fetch(`/api/tweet?username=${encodedUsername}`);
+    console.log('response::::::::::::', response);
+    const data = await response.json();
+    if (response.ok) {
+      console.log('User data:', data.user);
+    } else {
+      console.error('Error:', data.error);
+    }
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
+}
+
+// Example usage
+fetchUser('g0g1g0g1');
+
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState();
+  const [inputValue, setInputValue] = useState('');
   
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log('pressed Enter in EVENT::::::::::', event);
     const formData = new FormData(event.target);
     const value = formData.get('query');
     setInputValue(value);
